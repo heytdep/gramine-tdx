@@ -120,7 +120,7 @@ long tdx_vmcall_ve_reqmmio(uint64_t access_size, uint64_t direction, void* mmio_
                                    .r11 = TDG_VP_VMCALL_VE_REQMMIO,
                                    .r12 = access_size,
                                    .r13 = direction,
-                                   .r14 = (uint64_t)mmio_addr,
+                                   .r14 = (uint64_t)mmio_addr | tdx_get_shared_bit(),
                                    .r15 = (direction == TDG_VP_VMCALL_INSTR_IO_WRITE) ? *data : 0 };
     tdx_tdcall(&regs);
 
@@ -187,7 +187,7 @@ long tdx_vmcall_getquote(uint64_t addr, uint64_t size) {
                                    .rcx = 0x3c00, /* pass only R10-R13 to host */
                                    .r10 = 0,      /* use r11 to choose sub-function */
                                    .r11 = TDG_VP_VMCALL_GETQUOTE,
-                                   .r12 = addr,   /* addr and size must be 4KB aligned */
+                                   .r12 = addr | tdx_get_shared_bit(), /* 4KB-aligned shared GPA */
                                    .r13 = size };
     tdx_tdcall(&regs);
 

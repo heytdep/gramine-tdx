@@ -130,6 +130,8 @@ long tdx_vmcall_instr_io(uint64_t access_size, uint64_t direction, uint64_t iopo
 long tdx_vmcall_instr_rdmsr(uint64_t msr_index, uint64_t* out_msr_value);
 long tdx_vmcall_instr_wrmsr(uint64_t msr_index, uint64_t msr_value);
 
+uint64_t tdx_get_shared_bit(void);
+
 long tdx_vmcall_ve_reqmmio(uint64_t access_size, uint64_t direction, void* mmio_addr,
                            uint64_t* data);
 
