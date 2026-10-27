@@ -120,7 +120,7 @@ long tdx_vmcall_ve_reqmmio(uint64_t access_size, uint64_t direction, void* mmio_
                                    .r11 = TDG_VP_VMCALL_VE_REQMMIO,
                                    .r12 = access_size,
                                    .r13 = direction,
-                                   .r14 = (uint64_t)mmio_addr,
+                                   .r14 = (uint64_t)mmio_addr | tdx_get_shared_bit(),
                                    .r15 = (direction == TDG_VP_VMCALL_INSTR_IO_WRITE) ? *data : 0 };
     tdx_tdcall(&regs);
 

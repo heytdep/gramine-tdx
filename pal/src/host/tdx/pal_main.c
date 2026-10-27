@@ -45,6 +45,11 @@ static struct pal_handle* g_first_thread_handle = NULL;
 
 static uint64_t g_shared_bit;
 
+__attribute_no_sanitize_address
+uint64_t tdx_get_shared_bit(void) {
+    return g_shared_bit;
+}
+
 static int memory_mark_pages_shared(uint64_t addr, size_t size) {
     uint64_t mark_addr = addr;
     while (mark_addr < addr + size) {

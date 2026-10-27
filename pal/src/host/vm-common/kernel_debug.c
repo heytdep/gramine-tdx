@@ -15,7 +15,6 @@
 
 #include <stdint.h>
 #include <stddef.h>
-#include <string.h>
 
 #include "kernel_debug.h"
 #include "vm_callbacks.h"
