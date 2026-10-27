@@ -187,7 +187,7 @@ long tdx_vmcall_getquote(uint64_t addr, uint64_t size) {
                                    .rcx = 0x3c00, /* pass only R10-R13 to host */
                                    .r10 = 0,      /* use r11 to choose sub-function */
                                    .r11 = TDG_VP_VMCALL_GETQUOTE,
-                                   .r12 = addr,   /* addr and size must be 4KB aligned */
+                                   .r12 = addr | tdx_get_shared_bit(), /* 4KB-aligned shared GPA */
                                    .r13 = size };
     tdx_tdcall(&regs);
 
